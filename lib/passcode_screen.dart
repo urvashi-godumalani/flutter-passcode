@@ -153,7 +153,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
           ),
           Positioned(
             child: Align(
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomCenter,
               child: _buildLoginEmailButton(),
             ),
           )
@@ -220,7 +220,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
           ),
           Positioned(
             child: Align(
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomCenter,
               child: _buildLoginEmailButton(),
             ),
           )
