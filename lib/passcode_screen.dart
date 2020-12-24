@@ -24,6 +24,7 @@ class PasscodeScreen extends StatefulWidget {
 
   // custom for my project
   final Function onAdminButtonPressed;
+  final Function onLoginEmailButtonPressed;
 
   // Cancel button and delete button will be switched based on the screen state
   final Widget cancelButton;
@@ -34,25 +35,28 @@ class PasscodeScreen extends StatefulWidget {
   final KeyboardUIConfig keyboardUIConfig;
   final List<String> digits;
   final Widget adminButton;
+  final Widget loginEmailButton;
 
-  PasscodeScreen(
-      {Key key,
-      @required this.title,
-      this.passwordDigits = 6,
-      @required this.passwordEnteredCallback,
-      @required this.cancelButton,
-      @required this.deleteButton,
-      @required this.shouldTriggerVerification,
-      @required this.adminButton,
-      this.isValidCallback,
-      CircleUIConfig circleUIConfig,
-      KeyboardUIConfig keyboardUIConfig,
-      this.bottomWidget,
-      this.backgroundColor,
-      this.cancelCallback,
-      this.digits,
-      this.onAdminButtonPressed})
-      : circleUIConfig =
+  PasscodeScreen({
+    Key key,
+    @required this.title,
+    this.passwordDigits = 6,
+    @required this.passwordEnteredCallback,
+    @required this.cancelButton,
+    @required this.deleteButton,
+    @required this.shouldTriggerVerification,
+    @required this.adminButton,
+    @required this.loginEmailButton,
+    this.isValidCallback,
+    CircleUIConfig circleUIConfig,
+    KeyboardUIConfig keyboardUIConfig,
+    this.bottomWidget,
+    this.backgroundColor,
+    this.cancelCallback,
+    this.digits,
+    this.onAdminButtonPressed,
+    this.onLoginEmailButtonPressed,
+  })  : circleUIConfig =
             circleUIConfig == null ? const CircleUIConfig() : circleUIConfig,
         keyboardUIConfig = keyboardUIConfig == null
             ? const KeyboardUIConfig()
@@ -146,6 +150,12 @@ class _PasscodeScreenState extends State<PasscodeScreen>
               alignment: Alignment.bottomLeft,
               child: _buildAdminButton(),
             ),
+          ),
+          Positioned(
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: _buildLoginEmailButton(),
+            ),
           )
         ],
       );
@@ -207,6 +217,12 @@ class _PasscodeScreenState extends State<PasscodeScreen>
               alignment: Alignment.bottomLeft,
               child: _buildAdminButton(),
             ),
+          ),
+          Positioned(
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: _buildLoginEmailButton(),
+            ),
           )
         ],
       );
@@ -253,6 +269,10 @@ class _PasscodeScreenState extends State<PasscodeScreen>
 
   _onAdminButtonPressed() {
     widget.onAdminButtonPressed();
+  }
+
+  _onLoginEmailButtonPressed() {
+    widget.onLoginEmailButtonPressed();
   }
 
   _onKeyboardButtonPressed(String text) {
@@ -322,6 +342,18 @@ class _PasscodeScreenState extends State<PasscodeScreen>
         child: Container(
           margin: widget.keyboardUIConfig.digitInnerMargin,
           child: widget.adminButton,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLoginEmailButton() {
+    return Container(
+      child: CupertinoButton(
+        onPressed: _onLoginEmailButtonPressed,
+        child: Container(
+          margin: widget.keyboardUIConfig.digitInnerMargin,
+          child: widget.loginEmailButton,
         ),
       ),
     );
